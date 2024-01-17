@@ -15,14 +15,32 @@
 const griglia = document.getElementById("grid");
 const button = document.getElementById("btn");
 const difficoltà = document.getElementById("sct");
-let arrayBombe= []
+let arrayBombeE= []
+let arrayBombeM= []
+let arrayBombeH=[]
+let arrayBox=[]
 const difficoltaIniziale = difficoltà.value;
-let gameOver= true
+let gameOver= false 
+let checkbox= 0
+let safebox= 0
 
-for(let j=0;j<= 16; j++){
+
+for(let j=0;j< 16; j++){
      bomba = generaNumeroCasuale(1, 100)
-     if (!arrayBombe.includes(bomba)) {
-         arrayBombe.push(bomba);
+     if (!arrayBombeE.includes(bomba)) {
+         arrayBombeE.push(bomba);
+        }
+    }
+for(let j=0;j< 16; j++){
+    bomba = generaNumeroCasuale(1, 81)
+    if (!arrayBombeM.includes(bomba)) {
+        arrayBombeM.push(bomba);
+        }
+    }
+    for(let j=0;j< 16; j++){
+    bomba = generaNumeroCasuale(1, 49)
+    if (!arrayBombeH.includes(bomba)) {
+        arrayBombeH.push(bomba);
         }
     }
     
@@ -33,9 +51,9 @@ for(let j=0;j<= 16; j++){
         const difficoltaSelezionata = difficoltà.value;
     
         creaGriglia(difficoltaSelezionata);
-
+        gameOver=false
     });
-    console.log(arrayBombe)
+    
 
 
 function creaGriglia(difficolta) {
@@ -43,27 +61,42 @@ function creaGriglia(difficolta) {
     griglia.innerHTML = "";
 
     if (difficolta === "easy") {
-        for (let i = 0; i < 100; i++) {
-            if (!gameOver) {
-                break; // Se il gioco è già finito, interrompi il ciclo
-              }
+        for (let i = 0; i < 100 ; i++) {
             let box = document.createElement("div");
             box.classList.add("box");
             griglia.append(box);
             box.innerHTML = i + 1
             box.addEventListener("click", function () {
+
+                safebox= 100 - arrayBombeE
+
+                if (gameOver=== true) {
+                    return; 
+                  }
                 this.classList.toggle("active");
                 console.log(this);
-                if (arrayBombe.includes(parseInt(box.innerHTML))) {
+                if (arrayBombeE.includes(parseInt(box.innerHTML))) {
                     box.classList.toggle("activebomb")
-                    gameOver= false
-                    console.log(gameOver)
+                    gameOver= true
                   }
-            });
+                else {
+                    checkbox++;
+                }
 
+                if(safebox === checkbox){
+                    gameOver=true
+                }
+
+                
+
+                 
+            });
             
+            arrayBox.push(box)
             
         }
+        
+        
     } else if (difficolta === "medium") {
         for (let i = 0; i < 81; i++) {
             let box = document.createElement("div");
@@ -71,13 +104,27 @@ function creaGriglia(difficolta) {
             griglia.append(box);
             box.innerHTML = i + 1;
             box.addEventListener("click", function () {
+                safebox= 81 - arrayBombeM
+                if (gameOver=== true) {
+                    return; 
+                  }
                 this.classList.toggle("active");
                 console.log(this);
-                if (arrayBombe.includes(parseInt(box.innerHTML))) {
+                if (arrayBombeM.includes(parseInt(box.innerHTML))) {
                     box.classList.toggle("activebomb");
+                    gameOver= true
                   }
+                  else {
+                    checkbox++;
+                }
+
+                if(safebox === checkbox){
+                    gameOver=true
+                }
             });
+            arrayBox.push(box)
         }
+        console.log(arrayBox)
     }
     else if (difficolta === "hard") {
         for (let i = 0; i < 49; i++) {
@@ -86,16 +133,30 @@ function creaGriglia(difficolta) {
             griglia.append(box);
             box.innerHTML = i + 1;
             box.addEventListener("click", function () {
+                safebox= 49 - arrayBombeH
+                if (gameOver=== true) {
+                    return; 
+                  }
                 this.classList.toggle("active");
                 console.log(this);
-                if (arrayBombe.includes(parseInt(box.innerHTML))) {
+                if (arrayBombeH.includes(parseInt(box.innerHTML))) {
                     box.classList.toggle("activebomb");
+                    gameOver= true
                   }
+                  else {
+                    checkbox++;
+                }
+
+                if(safebox === checkbox){
+                    gameOver=true
+                }  
             });
         }
     }
 }
 
+
+console.log(arrayBombeH)
 
 
 
@@ -103,6 +164,9 @@ function generaNumeroCasuale(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
+
+
+  
  
   
   
