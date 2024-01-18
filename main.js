@@ -26,26 +26,19 @@ let gameOver = false;
 let checkbox = 0;
 let safebox = 0;
 
-for (let j = 0; j < 16; j++) {
-    bomba = generaNumeroCasuale(1, 100);
-    if (!arrayBombeE.includes(bomba)) {
-        arrayBombeE.push(bomba);
+function generaBombe(arrayBombe, min, max, numeroBombe) {
+    while (arrayBombe.length < numeroBombe) {
+        let bomba = generaNumeroCasuale(min, max);
+        if (!arrayBombe.includes(bomba)) {
+            arrayBombe.push(bomba);
+        }
     }
 }
 
-for (let j = 0; j < 16; j++) {
-    bomba = generaNumeroCasuale(1, 81);
-    if (!arrayBombeM.includes(bomba)) {
-        arrayBombeM.push(bomba);
-    }
-}
+generaBombe(arrayBombeE, 1, 100, 16);
+generaBombe(arrayBombeM, 1, 81, 16);
+generaBombe(arrayBombeH, 1, 49, 16);
 
-for (let j = 0; j < 16; j++) {
-    bomba = generaNumeroCasuale(1, 49);
-    if (!arrayBombeH.includes(bomba)) {
-        arrayBombeH.push(bomba);
-    }
-}
 
 button.addEventListener("click", function () {
     griglia.classList.remove("d-none");
@@ -63,6 +56,7 @@ function creaGriglia(difficolta) {
     griglia.innerHTML = "";
 
     if (difficolta === "easy") {
+        console.log(arrayBombeE);
         for (let i = 0; i < 100; i++) {
             let box = document.createElement("div");
             box.classList.add("box");
@@ -97,6 +91,7 @@ function creaGriglia(difficolta) {
         }
 
     } else if (difficolta === "medium") {
+        console.log(arrayBombeM);
         for (let i = 0; i < 81; i++) {
             let box = document.createElement("div");
             box.classList.add("box2");
@@ -130,6 +125,7 @@ function creaGriglia(difficolta) {
             arrayBox.push(box);
         }
     } else if (difficolta === "hard") {
+        console.log(arrayBombeH);
         for (let i = 0; i < 49; i++) {
             let box = document.createElement("div");
             box.classList.add("box3");
@@ -163,9 +159,9 @@ function creaGriglia(difficolta) {
             arrayBox.push(box);
         }
     }
+    
 }
 
-console.log(arrayBombeH);
 
 function generaNumeroCasuale(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
