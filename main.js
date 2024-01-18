@@ -49,6 +49,10 @@ button.addEventListener("click", function () {
     gameOver = false;
     checkbox = 0;
     safebox = 0;
+
+    risultato.innerHTML= ""
+    punteggio.innerHTML= ``
+    
 });
 
 function creaGriglia(difficolta) {
