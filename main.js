@@ -89,6 +89,7 @@ function creaGriglia(difficolta) {
                 if (checkbox === 100 - arrayBombeE.length) {
                     gameOver = true;
                     risultato.innerHTML= "Hai vinto"
+                    punteggio.innerHTML= `Punteggio ${checkbox}`
                 }
             });
 
@@ -113,12 +114,16 @@ function creaGriglia(difficolta) {
                 if (arrayBombeM.includes(parseInt(box.innerHTML))) {
                     box.classList.toggle("activebomb");
                     gameOver = true;
+                    risultato.innerHTML= "Hai perso"
+                    punteggio.innerHTML= `Punteggio ${checkbox}`
                 } else {
                     checkbox++;
                 }
 
                 if (checkbox === 81 - arrayBombeM.length) {
                     gameOver = true;
+                    risultato.innerHTML= "Hai vinto"
+                    punteggio.innerHTML= `Punteggio ${checkbox}`
                 }
             });
 
@@ -142,12 +147,16 @@ function creaGriglia(difficolta) {
                 if (arrayBombeH.includes(parseInt(box.innerHTML))) {
                     box.classList.toggle("activebomb");
                     gameOver = true;
+                    risultato.innerHTML= "Hai perso"
+                    punteggio.innerHTML= `Punteggio ${checkbox}`
                 } else {
                     checkbox++;
                 }
 
                 if (checkbox === 49 - arrayBombeH.length) {
                     gameOver = true;
+                    risultato.innerHTML= "Hai vinto"
+                    punteggio.innerHTML= `Punteggio ${checkbox}`
                 }
             });
 
@@ -163,7 +172,7 @@ function generaNumeroCasuale(min, max) {
 }
 
 
-//   limite di tentativi e messaggio finale 
+
 
 
 
